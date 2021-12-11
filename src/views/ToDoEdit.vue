@@ -1,14 +1,24 @@
 <template>
   <h2 class="text-center">Edit task</h2>
-  <Form />
+  <FormEdit :id="taskId"/>
 </template>
 
 <script>
-import Form from '@/components/Form.vue'
+import FormEdit from '@/components/FormEdit.vue'
 
 export default {
   components: {
-    Form,
+    FormEdit,
+  },
+  props: {
+    id: String
+  },
+  async setup(props) {
+    let taskId = props.id;
+
+    return {
+      taskId
+    }
   }
 }
 </script>

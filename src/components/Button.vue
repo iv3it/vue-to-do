@@ -1,12 +1,13 @@
 <template>
-  <button class="button">{{ text }}</button>
+  <button :type="buttonType" class="button">{{ text }}</button>
 </template>
 
 <script>
 export default {
   name: 'Button',
   props: {
-    text: String
+    text: String,
+    buttonType: String,
   }
 }
 </script>
@@ -22,6 +23,7 @@ export default {
   padding: 0.1rem 0.5rem;
   transition: 0.2s ease-out;
   font-weight: 700;
+  white-space: nowrap;
 
   &:hover {
     color: $white;
@@ -31,9 +33,25 @@ export default {
   &--dark {
     background-color: $black;
     color: $white;
+    border: 1px solid $black;
 
     &:hover {
       color: $black;
+      background-color: $white;
+    }
+
+    &--xl {
+      padding: 0.7rem 2rem;
+    }
+  }
+
+  &--red {
+    background-color: $red;
+    color: $white;
+    border: 1px solid $red;
+
+    &:hover {
+      color: $red;
       background-color: $white;
     }
 

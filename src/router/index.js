@@ -16,9 +16,10 @@ const routes = [
     component: ToDoAdd
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'Edit',
-    component: ToDoEdit
+    component: ToDoEdit,
+    props: true,
   },
 ]
 

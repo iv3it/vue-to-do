@@ -1,14 +1,14 @@
 <template>
   <h2 class="text-center">Add a new task</h2>
-  <Form />
+  <FormAdd />
 </template>
 
 <script>
-import Form from '@/components/Form.vue'
+import FormAdd from '@/components/FormAdd.vue'
 
 export default {
   components: {
-    Form,
+    FormAdd,
   }
 }
 </script>

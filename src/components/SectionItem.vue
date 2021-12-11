@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center item">
+  <div class="d-flex justify-content-between align-items-center mb-3 item">
     <div class="d-flex">
       <input type="checkbox" />
       <div class="ms-3">
@@ -7,10 +7,10 @@
         <p class="item__subtitle">Added: 21.11.2021</p>
       </div>
     </div>
-    <router-link :to="{ name: 'Edit' }">
+    <router-link :to="{ name: 'Edit', params: { id: id } }">
       <Button text="Edit" class="button button--dark"/>
     </router-link>
-    <div class="priority-label"></div>
+    <div class="priority-label" :class="'priority-label--' + priority"></div>
   </div>
 </template>
 
@@ -20,15 +20,22 @@ import Button from '@/components/Button.vue'
 export default {
   name: 'SectionItem',
   props: {
-    title: String
+    title: String,
+    id: String,
+    priority: String,
   },
   components: {
     Button,
+  },
+  setup(props) {
+    
+    return {
+      
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../variables';
 
@@ -38,8 +45,19 @@ export default {
   left: 0;
   width: 0;
   height: 0;
-  border-top: 0.9rem solid $red;
   border-right: 0.9rem solid transparent;
+
+  &--low {
+    border-top: 0.9rem solid $green;
+  }
+
+  &--medium {
+    border-top: 0.9rem solid $yellow;
+  }
+
+  &--high {
+    border-top: 0.9rem solid $red;
+  }
 }
 .item {
   position: relative;
