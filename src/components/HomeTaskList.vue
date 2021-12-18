@@ -6,8 +6,8 @@
       <Button text="A-Z"/>
     </div>
 
-    <div v-for="task in tasks" :key="task.id">
-      <SectionItem :title="task.title" :id="task.id" :priority="task.priority"/>
+    <div v-for="task in activeTasks" :key="task.id">
+      <SectionItem :title="task.title" :id="task.id" :priority="task.priority" :completed="task.completed"/>
     </div>
   </section>
 
@@ -17,8 +17,8 @@
       <Button text="Priority" class="me-3"/>
       <Button text="A-Z"/>
     </div>
-    <div v-for="task in tasks" :key="task.id">
-      <SectionItem :title="task.title" :id="task.id" :priority="task.priority"/>
+    <div v-for="task in completedTasks" :key="task.id">
+      <SectionItem :title="task.title" :id="task.id" :priority="task.priority" :completed="task.completed"/>
     </div>
   </section>
 </template>
@@ -26,7 +26,8 @@
 <script>
 import SectionItem from '@/components/SectionItem.vue'
 import Button from '@/components/Button.vue'
-import { getTasks } from '@/firebase'
+import { onTasksUpdated } from '@/firebase'
+import { ref, computed } from 'vue';
 
 export default {
   name: 'HomeTaskList',
@@ -34,11 +35,23 @@ export default {
     SectionItem,
     Button,
   },
-  async setup() {
-    let tasks = await getTasks
+  setup() {
+    let tasks = ref([]);
+
+    let onSnapshot = (snapshot) => {
+      tasks.value = [];
+      snapshot.docs.forEach((doc) => {
+        tasks.value.push({...doc.data(), id: doc.id})
+      })
+    }
+
+    onTasksUpdated(onSnapshot);
     
+    const activeTasks = computed(() => tasks.value.filter((task) => !task.completed));
+    const completedTasks = computed(() => tasks.value.filter((task) => task.completed));
+
     return {
-      tasks
+      tasks, activeTasks, completedTasks
     }
   },
 }

@@ -3,10 +3,7 @@
 
   <ButtonAddItem />
 
-  <Suspense>
-    <HomeTaskList />
-  </Suspense>
-
+  <HomeTaskList />
 </template>
 
 <script>

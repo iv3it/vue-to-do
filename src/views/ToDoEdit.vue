@@ -1,6 +1,8 @@
 <template>
   <h2 class="text-center">Edit task</h2>
-  <FormEdit :id="taskId"/>
+  <Suspense>
+    <FormEdit :id="taskId"/>
+  </Suspense>
 </template>
 
 <script>
@@ -13,7 +15,7 @@ export default {
   props: {
     id: String
   },
-  async setup(props) {
+  setup(props) {
     let taskId = props.id;
 
     return {

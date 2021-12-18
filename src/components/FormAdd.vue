@@ -64,6 +64,7 @@ export default {
       title: "", 
       priority: "",
       category: "",
+      completed: false,
     }
 
     const onSubmit = async () => {

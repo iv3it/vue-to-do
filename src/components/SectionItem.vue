@@ -1,10 +1,9 @@
 <template>
   <div class="d-flex justify-content-between align-items-center mb-3 item">
     <div class="d-flex">
-      <input type="checkbox" />
+      <input type="checkbox" @click="toggleFav(completed)" :checked="completed" />
       <div class="ms-3">
         <p class="item__title">{{ title }}</p>
-        <p class="item__subtitle">Added: 21.11.2021</p>
       </div>
     </div>
     <router-link :to="{ name: 'Edit', params: { id: id } }">
@@ -16,6 +15,7 @@
 
 <script>
 import Button from '@/components/Button.vue'
+import { updateTask } from '@/firebase'
 
 export default {
   name: 'SectionItem',
@@ -23,14 +23,22 @@ export default {
     title: String,
     id: String,
     priority: String,
+    completed: Boolean,
   },
   components: {
     Button,
   },
   setup(props) {
+    let id = props.id;
+    let completed = props.completed;
+
+    async function toggleFav() {
+      completed = !completed;
+      await updateTask({ completed: completed }, id);
+    }
     
     return {
-      
+      toggleFav
     }
   }
 }
@@ -68,13 +76,6 @@ export default {
   &__title {
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 0;
-  }
-
-  &__subtitle {
-    font-size: 0.7rem;
-    font-weight: 500;
-    font-style: italic;
     margin-bottom: 0;
   }
 }

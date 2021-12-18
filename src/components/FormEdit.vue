@@ -50,7 +50,7 @@
 
 <script>
 import Button from '@/components/Button.vue'
-import { getTask, updateTask, deleteTask } from '@/firebase'
+import { getTask, setTask, deleteTask } from '@/firebase'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -70,10 +70,15 @@ export default {
       title: taskData.title, 
       priority: taskData.priority,
       category: taskData.category,
+      completed: taskData.completed,
     }
 
     const onSubmit = async () => {
-      await updateTask({ ...form }, id);
+      await setTask({ ...form }, id);
+
+      router.push({
+        name: "Home",
+      });
     };
 
     const removeData = async () => {

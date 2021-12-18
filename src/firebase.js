@@ -3,12 +3,13 @@ import { initializeApp } from "firebase/app";
 import { 
   getFirestore,
   collection,
-  getDocs,
   getDoc,
   doc,
   addDoc,
   setDoc,
   deleteDoc,
+  updateDoc,
+  onSnapshot,
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -32,20 +33,10 @@ const db = getFirestore();
 // collection ref
 const collectionRef = collection(db, collectionName);
 
-// get collection data
-export const getTasks = 
-getDocs(collectionRef)
-  .then((snapshot) => {
-    let tasks = [];
-    snapshot.docs.forEach((doc) => {
-      tasks.push({...doc.data(), id: doc.id})
-    })
-
-    return tasks
-  })
-  .catch(err => {
-    console.log(err.message)
-  })
+// get realtime data
+export const onTasksUpdated = (callback) => {
+  onSnapshot(collectionRef, callback)
+}
 
 // get task data
 export const getTask = async(id) => {
@@ -63,7 +54,7 @@ export const addTask = async(taskData) => {
 };
 
 // update task
-export const updateTask = async(taskData, id) => {
+export const setTask = async(taskData, id) => {
   const taskRef = doc(db, collectionName, id);
   await setDoc(taskRef,
     taskData
@@ -74,4 +65,10 @@ export const updateTask = async(taskData, id) => {
 export const deleteTask = async(id) => {
   const taskRef = doc(db, collectionName, id);
   await deleteDoc(taskRef);
+}
+
+// update task
+export const updateTask = async(taskData, id) => {
+  const taskRef = doc(db, collectionName, id);
+  await updateDoc(taskRef, taskData);
 }
