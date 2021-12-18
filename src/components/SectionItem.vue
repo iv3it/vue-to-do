@@ -54,6 +54,7 @@ export default {
   width: 0;
   height: 0;
   border-right: 0.9rem solid transparent;
+  border-radius: 4px 0 0 0;
 
   &--low {
     border-top: 0.9rem solid $green;
