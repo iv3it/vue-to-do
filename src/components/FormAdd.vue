@@ -2,7 +2,8 @@
   <form class="form" @submit.prevent="onSubmit">
     <div class="mb-5">
       <label for="taskName" class="form__title">Task name</label>
-      <input type="text" id="taskName" v-model="form.title" required/>
+      <input type="text" id="taskName" v-model="form.title" :maxlength="maxlength" @keyup="charactersNumber" required/>
+      <p class="form__charactersCount"><span>{{ charactersAmount }}</span>/{{ maxlength }} characters</p>
     </div>
     <div class="mb-5">
       <p class="form__title">Priority</p>
@@ -51,6 +52,7 @@
 import Button from '@/components/Button.vue'
 import { addTask } from '@/firebase'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue';
 
 export default {
   name: 'FormAdd',
@@ -75,8 +77,15 @@ export default {
       });
     };
 
+    let maxlength = 50;
+    let charactersAmount = ref(form.title.length);
+
+    function charactersNumber() {
+      charactersAmount.value = form.title.length;
+    }
+
     return {
-      form, onSubmit
+      form, onSubmit, maxlength, charactersAmount, charactersNumber
     }
   }
 }
@@ -128,6 +137,11 @@ input {
       background-color: $black;
       color: $white;
     }
+  }
+
+  &__charactersCount {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
   }
 }
 </style>
