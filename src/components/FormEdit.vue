@@ -2,14 +2,14 @@
   <form class="form" @submit.prevent="onSubmit">
     <div class="mb-5">
       <label for="taskName" class="form__title">Task name</label>
-      <input type="text" id="taskName" v-model="form.title"/>
+      <input type="text" id="taskName" v-model="form.title" required>
     </div>
     <div class="mb-5">
       <p class="form__title">Priority</p>
       <div class="container p-0 mx-0">
         <div class="row">
           <div class="col-sm-4 col-12 d-flex justify-content-center">
-            <input type="radio" id="priorityLow" name="priority" value="low" class="form__radio" v-model="form.priority">
+            <input type="radio" id="priorityLow" name="priority" value="low" class="form__radio" v-model="form.priority" required>
             <label for="priorityLow" class="w-100 form__label text-center me-0 mb-sm-0 mb-3">Low</label>
           </div>
           <div class="col-sm-4 col-12 d-flex justify-content-center">
@@ -25,7 +25,7 @@
     </div>
     <div class="mb-5">
       <p class="form__title">Category</p>
-      <input type="radio" id="ideas" name="category" value="ideas" class="form__radio" v-model="form.category">
+      <input type="radio" id="ideas" name="category" value="ideas" class="form__radio" v-model="form.category" required>
       <label for="ideas" class="form__label mb-sm-0 mb-3">Ideas</label>
 
       <input type="radio" id="work" name="category" value="work" class="form__radio" v-model="form.category">
