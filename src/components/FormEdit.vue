@@ -73,6 +73,8 @@ export default {
       priority: taskData.priority,
       category: taskData.category,
       completed: taskData.completed,
+      addedDateUnix: taskData.addedDateUnix,
+      completedDateUnix: taskData.completedDateUnix,
     }
 
     const onSubmit = async () => {

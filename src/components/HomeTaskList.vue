@@ -8,7 +8,13 @@
 
     <transition-group class="itemsBox__list" tag="ul" name="list" appear>
       <li v-for="task in activeTasks" :key="task.id">
-        <SectionItem :title="task.title" :id="task.id" :priority="task.priority" :completed="task.completed"/>
+        <SectionItem 
+        :title="task.title" 
+        :id="task.id" 
+        :priority="task.priority" 
+        :addTime="task.addedDateUnix"
+        :completeTime="task.completedDateUnix" 
+        :completed="task.completed"/>
       </li>
     </transition-group>
   </section>
@@ -21,7 +27,14 @@
     </div>
     <transition-group class="itemsBox__list" tag="ul" name="list" appear>
       <li v-for="task in completedTasks" :key="task.id">
-        <SectionItem :title="task.title" :id="task.id" :priority="task.priority" :completed="task.completed"/>
+        <SectionItem 
+        :title="task.title" 
+        :id="task.id" 
+        :priority="task.priority" 
+        :addTime="task.addedDateUnix" 
+        :completeTime="task.completedDateUnix" 
+        :completed="task.completed"
+        />
       </li>
     </transition-group>
   </section>

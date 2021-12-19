@@ -4,6 +4,8 @@
       <input type="checkbox" @click="toggleFav(completed)" :checked="completed" />
       <div class="ms-3">
         <p class="item__title">{{ title }}</p>
+        <p class="item__subtitle" v-if="!completeTime || !completed">Added: {{ fullAddedDate }}</p>
+        <p class="item__subtitle" v-else>Completed: {{ fullCompletedDate }}</p>
       </div>
     </div>
     <router-link :to="{ name: 'Edit', params: { id: id } }">
@@ -24,6 +26,8 @@ export default {
     id: String,
     priority: String,
     completed: Boolean,
+    addTime: Number,
+    completeTime: Number,
   },
   components: {
     Button,
@@ -31,14 +35,21 @@ export default {
   setup(props) {
     let id = props.id;
     let completed = props.completed;
+    let addedDate = new Date(props.addTime);
+    let fullAddedDate = new Date(addedDate).toLocaleDateString();
+    let completedDate = new Date(props.completeTime);
+    let fullCompletedDate = new Date(completedDate).toLocaleDateString();
 
     async function toggleFav() {
       completed = !completed;
-      await updateTask({ completed: completed }, id);
+      await updateTask({ 
+        completed: completed,
+        completedDateUnix: Date.now()
+      }, id);
     }
     
     return {
-      toggleFav
+      toggleFav, fullAddedDate, fullCompletedDate
     }
   }
 }
@@ -77,6 +88,13 @@ export default {
   &__title {
     font-size: 1.1rem;
     font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  &__subtitle {
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-style: italic;
     margin-bottom: 0;
   }
 }
