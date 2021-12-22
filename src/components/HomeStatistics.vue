@@ -3,7 +3,6 @@
       <div class="statistics__circle">29</div>
       <div>
         <p class="statistics__text">TASKS DONE<br/>IN THE LAST 7 DAYS</p>
-        <p class="statistics__text statistics__text--sm">10 in the last 24 hours</p>
       </div>
   </section>
 </template>
@@ -44,10 +43,6 @@ export default {
     font-weight: 500;
     padding-left: 2rem;
     margin-bottom: 0;
-
-    &--sm {
-      font-size: 0.8rem;
-    }
   }
 
 }

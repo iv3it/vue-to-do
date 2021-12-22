@@ -68,7 +68,7 @@ export default {
       category: "",
       completed: false,
       addedDateUnix: Date.now(),
-      completedDateUnix: "",
+      completedDateUnix: 0,
     }
 
     const onSubmit = async () => {

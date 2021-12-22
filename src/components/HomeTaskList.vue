@@ -2,8 +2,6 @@
   <section class="mb-5">
     <div class="d-flex justify-content-between itemsBox">
       <h2 class="itemsBox__title">Active</h2>
-      <Button text="Priority" class="me-3"/>
-      <Button text="A-Z"/>
     </div>
 
     <transition-group class="itemsBox__list" tag="ul" name="list" appear>
@@ -22,8 +20,6 @@
   <section class="mb-5">
     <div class="d-flex justify-content-between itemsBox">
       <h2 class="itemsBox__title">Completed</h2>
-      <Button text="Priority" class="me-3"/>
-      <Button text="A-Z"/>
     </div>
     <transition-group class="itemsBox__list" tag="ul" name="list" appear>
       <li v-for="task in completedTasks" :key="task.id">
