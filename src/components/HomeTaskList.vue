@@ -38,28 +38,19 @@
 
 <script>
 import SectionItem from '@/components/SectionItem.vue'
-import Button from '@/components/Button.vue'
-import { onTasksUpdated } from '@/firebase'
-import { ref, computed } from 'vue';
+import { toRef, computed } from 'vue';
 
 export default {
   name: 'HomeTaskList',
   components: {
     SectionItem,
-    Button,
   },
-  setup() {
-    let tasks = ref([]);
+  props: {
+    tasks: Object,
+  },
+  setup(props) {
+    let tasks = toRef(props, 'tasks');
 
-    let onSnapshot = (snapshot) => {
-      tasks.value = [];
-      snapshot.docs.forEach((doc) => {
-        tasks.value.push({...doc.data(), id: doc.id})
-      })
-    }
-
-    onTasksUpdated(onSnapshot);
-    
     const activeTasks = computed(() => tasks.value.filter((task) => !task.completed));
     const completedTasks = computed(() => tasks.value.filter((task) => task.completed));
 
@@ -71,7 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @import '../variables';
 
 .itemsBox {

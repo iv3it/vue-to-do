@@ -1,6 +1,6 @@
 <template>
   <section class="statistics">
-      <div class="statistics__circle">29</div>
+      <div class="statistics__circle">{{ completedTasks7Days }}</div>
       <div>
         <p class="statistics__text">TASKS DONE<br/>IN THE LAST 7 DAYS</p>
       </div>
@@ -8,8 +8,23 @@
 </template>
 
 <script>
+import { toRef, computed } from 'vue';
+
 export default {
   name: 'HomeStatistics',
+  props: {
+    tasks: Object,
+  },
+  setup(props) {
+    let tasks = toRef(props, 'tasks');
+
+    let lastSevenDays = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    const completedTasks7Days = computed(() => tasks.value.filter((task) => task.completed && (task.completedDateUnix > lastSevenDays)).length);
+
+    return {
+      completedTasks7Days
+    }
+  }
 }
 </script>
 

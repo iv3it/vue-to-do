@@ -1,28 +1,39 @@
 <template>
-  <HomeStatistics />
+  <HomeStatistics :tasks="tasks"/>
 
   <ButtonAddItem />
 
-  <HomeTaskList />
+  <HomeTaskList :tasks="tasks" />
 </template>
 
 <script>
-// @ is an alias to /src
-import ButtonAddItem from '@/components/ButtonAddItem.vue'
 import HomeStatistics from '@/components/HomeStatistics.vue'
+import ButtonAddItem from '@/components/ButtonAddItem.vue'
 import HomeTaskList from '@/components/HomeTaskList.vue'
+import { onTasksUpdated } from '@/firebase'
+import { ref } from 'vue';
 
 export default {
-  name: 'Home',
+  name: 'ToDoHome',
   components: {
-    ButtonAddItem,
     HomeStatistics,
-    HomeTaskList
+    ButtonAddItem,
+    HomeTaskList,
   },
   setup() {
+    let tasks = ref([]);
+
+    let onSnapshot = (snapshot) => {
+      tasks.value = [];
+      snapshot.docs.forEach((doc) => {
+        tasks.value.push({...doc.data(), id: doc.id})
+      })
+    }
+
+    onTasksUpdated(onSnapshot);
     
     return {
-      
+      tasks,
     }
   },
 }
