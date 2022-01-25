@@ -27,22 +27,22 @@
     <div class="mb-5">
       <p class="form__title">Category</p>
       <input type="radio" id="ideas" name="category" value="ideas" class="form__radio" v-model="form.category" required>
-      <label for="ideas" class="form__label mb-sm-0 mb-3">Ideas</label>
+      <label for="ideas" class="form__label mb-md-0 mb-3">Ideas</label>
 
       <input type="radio" id="work" name="category" value="work" class="form__radio" v-model="form.category">
-      <label for="work" class="form__label mb-sm-0 mb-3">Work</label>
+      <label for="work" class="form__label mb-md-0 mb-3">Work</label>
 
       <input type="radio" id="meetings" name="category" value="meetings" class="form__radio" v-model="form.category">
-      <label for="meetings" class="form__label mb-sm-0 mb-3">Meetings</label>
+      <label for="meetings" class="form__label mb-md-0 mb-3">Meetings</label>
 
       <input type="radio" id="payment" name="category" value="payment" class="form__radio" v-model="form.category">
-      <label for="payment" class="form__label mb-sm-0 mb-3">Payment</label>
+      <label for="payment" class="form__label mb-md-0 mb-3">Payment</label>
 
       <input type="radio" id="shopping" name="category" value="shopping" class="form__radio" v-model="form.category">
-      <label for="shopping" class="form__label mb-sm-0 mb-3">Shopping</label>
+      <label for="shopping" class="form__label mb-md-0 mb-3">Shopping</label>
 
       <input type="radio" id="other" name="category" value="other" class="form__radio" v-model="form.category">
-      <label for="other" class="form__label mb-sm-0 mb-3">Other</label>
+      <label for="other" class="form__label mb-md-0 mb-3">Other</label>
     </div>
     <Button text="Save" class="button--dark button--dark--xl" buttonType="submit"/>
     <Button text="Delete" class="button--red button--red--xl ms-3" buttonType="button" @click="removeData"/>
