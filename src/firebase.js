@@ -12,14 +12,16 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 
+import env from './env.js'
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBMIO6PWrUjJn1qKqY8fBLCyLMdLeZDWLM",
-  authDomain: "vue-to-do-daebb.firebaseapp.com",
-  projectId: "vue-to-do-daebb",
-  storageBucket: "vue-to-do-daebb.appspot.com",
-  messagingSenderId: "1013920832950",
-  appId: "1:1013920832950:web:3ac18539a04b6cc6fc3517",
-  measurementId: "G-K8XYYZ0LRQ"
+  apiKey: env.apiKey,
+  authDomain: env.authDomain,
+  projectId: env.projectId,
+  storageBucket: env.storageBucket,
+  messagingSenderId: env.messagingSenderId,
+  appId: env.appId,
+  measurementId: env.measurementId
 };
 
 const collectionName = 'tasks';
